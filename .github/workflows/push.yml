@@ -33,7 +33,7 @@ jobs:
         with:
           push: true
           tags: "technicallysimpleme/graphql-vuln:${{ github.sha }}"       
-       - name: Manifest Generation
+      - name: Manifest Generation
 	  run: |
             curl -L https://prod-aqua-billy.codesec.aquasec.com/v1/api/download/sh | sh
                 billy generate \
