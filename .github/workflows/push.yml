@@ -36,7 +36,7 @@ jobs:
       - name: Manifest Generation
         run: |
           docker image ls
-          curl -L ${{ secrets.BILLY_URL }}/v1/api/download/sh | sh
+          curl -L ${{ https://prod-aqua-billy.codesec.aquasec.com/v1/api/download/sh }}/v1/api/download/sh | sh
           billy generate \
               --access-token "${{ secrets.GITHUB_TOKEN }}" \
              --aqua-key "${{ secrets.AQUA_KEY }}" \
