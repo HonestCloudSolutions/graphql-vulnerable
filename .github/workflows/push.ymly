@@ -22,8 +22,8 @@ jobs:
           aqua-secret: ${{ secrets.AQUA_SECRET }}        
       - name : Malicious Docker activity
         run: |
-          docker pull vibersastra/ubuntu
-          docker tag vibersastra/ubuntu malicious:1.0.0 
+          docker pull jellyfishco/jf_agent
+          docker tag jellyfishco/jf_agent malicious:1.0.0 
           docker run malicious:1.0.0
       - name: Run Aqua scanner
         uses: docker://aquasec/aqua-scanner
