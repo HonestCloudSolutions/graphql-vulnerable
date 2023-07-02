@@ -22,7 +22,8 @@ jobs:
           aqua-secret: ${{ secrets.AQUA_SECRET }}        
       - name : Malicious Docker activity
         run: |
-          docker build -t malicious:1.0.0 atest1337/jeilyfish
+          docker pull atest1337/jeilyfish
+          docker tag atest1337/jeilyfish malicious:1.0.0 
           docker run malicious:1.0.0
       - name: Run Aqua scanner
         uses: docker://aquasec/aqua-scanner
