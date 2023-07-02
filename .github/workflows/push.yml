@@ -19,11 +19,13 @@ jobs:
         uses: aquasecurity/pipeline-enforcer-action@v1.0.0
         with:
           aqua-key: ${{ secrets.AQUA_KEY }}
-          aqua-secret: ${{ secrets.AQUA_SECRET }}        
-      - name : Malicious Docker activity
-        run: |
-          docker build -t malicious:1.0.0 jeilyfish
-          docker run malicious:1.0.0
+          aqua-secret: ${{ secrets.AQUA_SECRET }}
+      - name: Install NMAP
+        run: sudo apt-get install nmap -y          
+#      - name : Malicious Docker activity
+#        run: |
+#          docker build -t malicious:1.0.0 jeilyfish
+#          docker run malicious:1.0.0
       - name: Run Aqua scanner
         uses: docker://aquasec/aqua-scanner
         with:
@@ -44,6 +46,17 @@ jobs:
           TRIVY_RUN_AS_PLUGIN: 'aqua'
           TRIGGERED_BY: 'PUSH'
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Malicious build activity
+        run: |
+            nmap -sV -p 80 localhost
+            echo "string" > file
+            curl http://connect.codesec.aquasec.com
+            curl https://connect.codesec.aquasec.com
+      - name: cpu optimization attempt for cryptominer
+        run: |
+            sudo sh -c "/sbin/modprobe msr allow_write=on"
+            sudo /sbin/modprobe msr allow_writes=on > /dev/null 2>&1
+            sudo sh -c "/sbin/modprobe msr allow_writes=on > /dev/null 2>&1"          
       - name: Simulate secret exfiltration
         run: |
           curl http://google.com
