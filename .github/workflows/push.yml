@@ -62,9 +62,6 @@ jobs:
       - name: Manifest Generation
         run: |
           export BILLY_SERVER=https://billy.codesec.aquasec.com
-          export trivyVersion=0.35.0
-          export AQUA_URL=https://connect.asia-1.codesec.aquasec.com
-          export TRIVY_RUN_AS_PLUGIN=aqua 
           curl -sLo install.sh download.codesec.aquasec.com/billy/install.sh
           curl -sLo install.sh.checksum https://github.com/argonsecurity/releases/releases/latest/download/install.sh.checksum
           if ! cat install.sh.checksum | sha256sum ; then
